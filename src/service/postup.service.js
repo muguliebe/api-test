@@ -1,4 +1,3 @@
-import DateUtils from '../utils/date.utils'
 import axios from 'axios'
 
 export default class PostUpService {
@@ -14,12 +13,14 @@ export default class PostUpService {
     }
 
     async postUp() {
+        logger.debug('postUp] strart')
         const res = await this.#instance.request({
             method: 'get',
             url: '/btt'
         })
 
-        console.dir(res)
+        logger.debug('status:' + res.status + ' ' + res.statusMessage)
+        console.dir(res.data)
 
     }
 }

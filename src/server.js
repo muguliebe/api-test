@@ -1,6 +1,5 @@
-import ServerConfig from './config/server.config'
-import dotenv from 'dotenv'
 import path from 'path'
+import dotenv from 'dotenv'
 import fs from 'fs'
 import ConfigService from './service/config.service'
 import mkdirp from 'mkdirp'
@@ -8,7 +7,6 @@ import winston from 'winston'
 import winstonDaily from 'winston-daily-rotate-file'
 import 'date-utils'
 import chalk from 'chalk'
-import allAdvice from './middleware/allAdvice'
 import PostUpService from './service/postup.service'
 
 const { combine, timestamp, printf } = winston.format
@@ -95,16 +93,6 @@ async function main() {
     })
 
     logger.debug('main start')
-
-    const server = new ServerConfig({
-        port: process.env.PORT || 8000,
-        controllerPath: path.join(__dirname, './controllers'),
-        apiPath: path.join(__dirname, './api'),
-        batchPath: path.join(__dirname, './batch'),
-        middlewares: [allAdvice],
-    })
-
-    await server.listen()
 }
 
 main().then(async () => {
